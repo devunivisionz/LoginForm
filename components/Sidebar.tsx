@@ -3,7 +3,7 @@ import TestimonialCard from './TestimonialCard'
 
 export default function Sidebar() {
   return (
-    <aside className="w-96 bg-blue-50 border-r border-blue-200 p-8 flex flex-col h-screen">
+    <aside className="w-96 bg-[#E8F0FD]  p-8 flex flex-col h-screen">
       <div className="flex-1 space-y-8">
         {/* Logo */}
         <div className="flex items-center space-x-3">
@@ -12,7 +12,7 @@ export default function Sidebar() {
         </div>
         
         {/* Badge */}
-        <div className="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-800 text-sm font-medium">
+        <div className="inline-flex items-center rounded-full text-[14px] leading-5 font-bold">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
 <g clip-path="url(#clip0_1_134)">
 <g clip-path="url(#clip1_1_134)">
@@ -32,11 +32,11 @@ export default function Sidebar() {
         </div>
         
         {/* Main Headline */}
-        <div className="space-y-4">
-          <h2 className="text-2xl font-bold text-gray-900 leading-tight">
+        <div className="!mt-[6px]">
+          <h2 className="text-[32px] tracking-[-1px] font-bold  text-gray-900 leading-12">
             Your <span className="text-blue-600">Work Note</span> is Minutes Away
           </h2>
-          <p className="text-sm text-gray-600 leading-relaxed">
+          <p className="text-[16px]  leading-6 text-[#111827] mt-[10px]">
             Note: Due to capacity we are currently only able to provide a limited number of notes per day. To see if you qualify please fill out the following short survey!
           </p>
         </div>
