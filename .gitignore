@@ -12,7 +12,7 @@ pnpm-debug.log*
 out/
 dist/
 build/
-
+.cursor/
 # OS files
 .DS_Store
 Thumbs.db
