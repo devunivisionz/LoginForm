@@ -22,25 +22,22 @@ export default function EmailForm() {
     inputRefs.current = inputRefs.current.slice(0, 4)
   }, [])
 
-  const handleEmailSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError('')
-    
-    if (!emailValidator(email)) {
-      setError('Please enter a valid email address')
-      return
-    }
-    
-    setIsLoading(true)
-    try {
-      await sendEmail(email)
-      setStep(2) // triggers animation
-    } catch (err) {
-      setError('Failed to send verification email. Please try again.')
-    } finally {
-      setIsLoading(false)
-    }
+ const handleEmailSubmit = async () => {
+  setError('')
+  if (!emailValidator(email)) {
+    setError('Please enter a valid email address')
+    return
   }
+  setIsLoading(true)
+  try {
+    await sendEmail(email)
+    setStep(2) // triggers animation
+  } catch (err) {
+    setError('Failed to send verification email. Please try again.')
+  } finally {
+    setIsLoading(false)
+  }
+}
 
   const handleCodeChange = (index: number, value: string) => {
     if (value.length > 1) return
@@ -146,17 +143,17 @@ export default function EmailForm() {
           <div className="animate-fadeIn absolute top-[70px] left-0 w-full">
             <div className="flex justify-left space-x-3 mb-3">
               {code.map((digit, index) => (
-                <input
-                  key={index}
-                  ref={(el) => inputRefs.current[index] = el}
-                  type="text"
-                  maxLength={1}
-                  value={digit}
-                  onChange={(e) => handleCodeChange(index, e.target.value)}
-                  onKeyDown={(e) => handleKeyDown(index, e)}
-                  className="w-12 h-12 text-center text-xl font-bold border-[1px] border-[#DFE1E6] rounded-[12px] focus:ring-2 focus:ring-blue-200"
-                  inputMode="numeric"
-                />
+           <input
+  key={index}
+  ref={el => { inputRefs.current[index] = el }}
+  type="text"
+  maxLength={1}
+  value={digit}
+  onChange={(e) => handleCodeChange(index, e.target.value)}
+  onKeyDown={(e) => handleKeyDown(index, e)}
+  className="w-12 h-12 text-center text-xl font-bold border-[1px] border-[#DFE1E6] rounded-[12px] focus:ring-2 focus:ring-blue-200"
+  inputMode="numeric"
+/>
               ))}
             </div>
             <div className="text-center">
@@ -223,14 +220,14 @@ export default function EmailForm() {
             Next
           </Button>
         ) : (
-          <Button 
-            type="button" 
-            variant="secondary" 
-            disabled={code.join('').length !== 4}
-            onClick={handleCodeSubmit}
-          >
-            Next
-          </Button>
+<Button 
+  type="submit" 
+  variant="primary" 
+  disabled={!email.trim() || isLoading}
+  onClick={handleEmailSubmit}
+>
+  Next
+</Button>
         )}
       </div>
     </div>
