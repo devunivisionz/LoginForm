@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import Button from './Button'
 import { sendEmail } from '@/lib/api'
 import { emailValidator } from '@/lib/validations'
-import EmailToOTPForm from './EmailToOtp'
+import ShinyText from './ShinyText'
 
 export default function EmailForm() {
   const [email, setEmail] = useState('')
@@ -125,7 +125,9 @@ export default function EmailForm() {
             <div className="bg-blue-100 rounded-lg p-4 flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <span className="text-blue-700 font-medium">Email</span>
-                <span className="text-blue-700 font-bold">{email}</span>
+                {/* <span className="text-blue-700 font-bold"></span> */}
+                <ShinyText text={email} disabled={false} speed={8}  />
+
               </div>
               <button
                 type="button"
