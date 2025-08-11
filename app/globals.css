@@ -5,10 +5,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
-  html {
-    font-family: 'Inter', system-ui, sans-serif;
+
+  *{
+    font-family: 'Satoshi', sans-serif !important;
   }
-  
   body {
     @apply bg-[#fff] text-gray-900;
   }
@@ -30,6 +30,10 @@
 main{
   background-color: white;
   align-items: baseline!important;
+  border-radius: 24px;
+}
+body.antialiased > div {
+    background: #ff000000 !important;
 }
 
 .custom-max-width {
@@ -62,4 +66,8 @@ main{
 
 .shiny-text.disabled {
   animation: none;
+}
+body.antialiased {
+    background: #E8F0FD;
+    padding: 10px;
 }

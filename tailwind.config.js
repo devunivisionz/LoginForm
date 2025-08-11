@@ -37,14 +37,14 @@ module.exports = {
       "100%": { opacity: "1", transform: "translateY(-16px)" }
     },
     slideLeft: {
-      "0%": { transform: "translateX(0)", opacity: "1" },
-      "100%": { transform: "translateX(-24px)", opacity: "1" }
+      "0%": { transform: "translateX(-70)", opacity: "1" },
+      "100%": { transform: "translateX(0px)", opacity: "1" }
     }
   },
   animation: {
     slideUp: "slideUp 0.3s ease-in-out forwards",
     fadeIn: "fadeIn 1s ease-in-out forwards",
-    slideLeft: "slideLeft 0.4s ease-in-out forwards"
+    slideLeft: "slideLeft 0.4s ease-in-out 8s forwards"
   }
     }
   },
