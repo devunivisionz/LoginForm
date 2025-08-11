@@ -16,7 +16,7 @@ build/
 # OS files
 .DS_Store
 Thumbs.db
-
+cache/
 # Env files
 .env
 .env.local
