@@ -27,20 +27,25 @@ module.exports = {
   },
   theme: {
        extend: {
-      keyframes: {
-        slideUp: {
-          "0%": { transform: "translateY(0)", opacity: "1" },
-          "100%": { transform: "translateY(-40px)", opacity: "1" }
-        },
-        fadeIn: {
-          "0%": { opacity: "0", transform: "translateY(20px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" }
-        }
-      },
-      animation: {
-        slideUp: "slideUp 0.4s ease-in-out forwards",
-        fadeIn: "fadeIn 0.4s ease-in-out forwards"
-      }
+  keyframes: {
+    slideUp: {
+      "0%": { marginTop:"0px", width:"calc(100% - 48px)", opacity: "1", translateY:"0px" },
+      "100%": { marginTop:"-24px", width:"calc(100% - 0px)", opacity: "1", translateY:"0px" }
+    },
+    fadeIn: {
+      "0%": { opacity: "0", transform: "translateY(50px)" },
+      "100%": { opacity: "1", transform: "translateY(-16px)" }
+    },
+    slideLeft: {
+      "0%": { transform: "translateX(0)", opacity: "1" },
+      "100%": { transform: "translateX(-24px)", opacity: "1" }
+    }
+  },
+  animation: {
+    slideUp: "slideUp 0.3s ease-in-out forwards",
+    fadeIn: "fadeIn 1s ease-in-out forwards",
+    slideLeft: "slideLeft 0.4s ease-in-out forwards"
+  }
     }
   },
   plugins: [],

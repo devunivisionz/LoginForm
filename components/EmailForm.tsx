@@ -100,20 +100,21 @@ export default function EmailForm() {
         <p className="text-gray-600">This is where we send the note.</p>
       </div>
 
-      <div className="space-y-4 relative min-h-[140px]">
+      <div className="space-y-4 relative  rounded-[12px] border-[1px] border-[#DFE1E6] py-6">
         {/* Email Input Section */}
         <div
           className={`transition-all duration-300 ${
-            step === 2 ? 'animate-slideUp absolute w-full' : ''
+            step === 2 ? 'animate-slideUp animate-slideUp relative mx-auto' : ''
           }`}
         >
           {step === 1 ? (
+          
             <div className="relative">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 pr-12 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full max-w-[calc(100% - 48px)] custom-max-width mx-auto flex px-4 py-[11px] pr-12 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Enter your email"
                 required
                 disabled={isLoading}
@@ -124,16 +125,17 @@ export default function EmailForm() {
                 </div>
               )}
             </div>
+         
           ) : (
-            <div className="bg-blue-100 rounded-lg p-4 flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <span className="text-blue-700 font-medium">Email</span>
+            <div className="bg-[#E8F0FD] rounded-[12px] rounded-bl-[0] rounded-br-[0] p-3 px-[24px] flex items-center justify-between ">
+              <div className="flex items-center space-x-3 gap-x-[12px]">
+                <span className="text-blue-700 font-light text-[#2563EB]">Email</span>
                 <span className="text-blue-700 font-bold">{email}</span>
               </div>
               <button
                 type="button"
                 onClick={() => setShowChangeEmail(!showChangeEmail)}
-                className="text-blue-600 hover:text-blue-700 font-medium underline decoration-dotted underline-offset-4"
+                className="text-[#353849] hover:text-blue-700 font-light underline decoration-dotted underline-offset-4"
               >
                 Change
               </button>
@@ -143,22 +145,34 @@ export default function EmailForm() {
 
         {/* OTP Section */}
         {step === 2 && (
-          <div className="animate-fadeIn absolute top-[70px] left-0 w-full">
-            <div className="flex justify-left space-x-3 mb-3">
-              {code.map((digit, index) => (
-                <input
-                  key={index}
-                  ref={(el) => inputRefs.current[index] = el}
-                  type="text"
-                  maxLength={1}
-                  value={digit}
-                  onChange={(e) => handleCodeChange(index, e.target.value)}
-                  onKeyDown={(e) => handleKeyDown(index, e)}
-                  className="w-12 h-12 text-center text-xl font-bold border-[1px] border-[#DFE1E6] rounded-[12px] focus:ring-2 focus:ring-blue-200"
-                  inputMode="numeric"
-                />
-              ))}
-            </div>
+          <div className="animate-fadeIn relative top-[0px] p-6 left-0 w-full mt-[0px]">
+             <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                Enter verification code
+              </h2>
+              <p className="text-sm text-gray-600 mb-3">
+                Enter the code sent to <span className='font-bold'>{email}</span> to use your saved information.
+              </p>
+              
+              <div className="flex justify-left space-x-3 mb-3">
+                {code.map((digit, index) => (
+                  <input
+                    key={index}
+                    ref={(el) => inputRefs.current[index] = el}
+                    type="text"
+                    maxLength={1}
+                    value={digit}
+                    onChange={(e) => handleCodeChange(index, e.target.value)}
+                    onKeyDown={(e) => handleKeyDown(index, e)}
+                    className={`w-12 h-12 text-center text-xl font-bold border-[1px] border-[#DFE1E6] rounded-[12px] focus:ring-2 focus:ring-blue-200 ${
+                      index === 3 
+                        ? 'border-blue-500 bg-blue-50' 
+                        : 'border-gray-300'
+                    }`}
+                    inputMode="numeric"
+                  />
+                ))}
+              </div>
+
             <div className="text-center">
               <button
                 type="button"
@@ -236,3 +250,4 @@ export default function EmailForm() {
     </div>
   )
 }
+

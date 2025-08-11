@@ -29,4 +29,9 @@
 }
 main{
   background-color: white;
+  align-items: baseline!important;
+}
+
+.custom-max-width {
+  max-width: calc(100% - 48px);
 }
