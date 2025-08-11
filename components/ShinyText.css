@@ -1,0 +1,32 @@
+.shiny-text {
+  color: transparent;
+  background: linear-gradient(
+    120deg,
+    rgba(29, 78, 216, 1) 0%,
+    rgba(29, 78, 216, 1) 42%,
+    rgba(255, 255, 255, 1) 48%,
+    rgba(255, 255, 255, 0.65) 50%,
+    rgba(255, 255, 255, 1) 52%,
+    rgba(29, 78, 216, 1) 58%,
+    rgba(29, 78, 216, 1) 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  animation: shine 10s linear infinite;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -50% 0;
+  }
+}
+
+.shiny-text.disabled {
+  animation: none;
+}

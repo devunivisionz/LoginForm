@@ -136,17 +136,17 @@ export default function CodeInput() {
           
           <div className="flex justify-center space-x-3 mb-4">
             {code.map((digit, index) => (
-              <input
-                key={index}
-                ref={(el) => inputRefs.current[index] = el}
-                type="text"
-                maxLength={1}
-                value={digit}
-                onChange={(e) => handleCodeChange(index, e.target.value)}
-                onKeyDown={(e) => handleKeyDown(index, e)}
-                className="w-16 h-16 text-center text-2xl font-bold border-2 border-blue-300 rounded-lg focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
-                inputMode="numeric"
-              />
+          <input
+  key={index}
+  ref={el => { inputRefs.current[index] = el }}
+  type="text"
+  maxLength={1}
+  value={digit}
+  onChange={(e) => handleCodeChange(index, e.target.value)}
+  onKeyDown={(e) => handleKeyDown(index, e)}
+  className="w-12 h-12 text-center text-xl font-bold border-[1px] border-[#DFE1E6] rounded-[12px] focus:ring-2 focus:ring-blue-200"
+  inputMode="numeric"
+/>
             ))}
           </div>
           
@@ -175,14 +175,14 @@ export default function CodeInput() {
             Back
           </Button>
           
-          <Button 
-            type="button" 
-            variant="secondary" 
-            disabled={code.join('').length !== 4}
-            onClick={handleSubmit}
-          >
-            Next
-          </Button>
+         <Button 
+  type="button" 
+  variant="secondary" 
+  disabled={code.join('').length !== 4}
+  onClick={() => handleSubmit(new Event('submit') as unknown as React.FormEvent)}
+>
+  Next
+</Button>
         </div>
       </div>
     </div>
