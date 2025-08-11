@@ -42,11 +42,11 @@ export default function Sidebar() {
         </div>
         
         {/* Testimonial */}
-        <TestimonialCard />
       </div>
-      
+              <TestimonialCard />
+
       {/* Pagination Dots - Fixed at bottom */}
-      <div className="flex justify-center space-x-2 pt-4">
+      <div className="flex justify-left space-x-2 pt-4">
         <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
         <div className="w-2 h-2 bg-blue-200 rounded-full"></div>
         <div className="w-2 h-2 bg-blue-200 rounded-full"></div>
