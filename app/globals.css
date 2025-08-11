@@ -71,3 +71,17 @@ body.antialiased {
     background: #E8F0FD;
     padding: 10px;
 }
+
+@media screen and (max-width: 767px) {
+  body.antialiased > div {
+    flex-direction: column;
+}
+aside {
+    height: auto!important;
+    gap: 50px;
+    padding: 40px 10px!important;
+}
+body.antialiased {
+    padding: 30px 10px;
+}
+}
