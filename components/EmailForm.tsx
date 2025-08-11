@@ -86,8 +86,8 @@ export default function EmailForm() {
     <div className="w-full">
       {/* Step Indicator */}
       <div className="text-left mb-4">
-        <span className="text-blue-600 font-semibold text-lg">
-          Step 3 <span className='text-gray-500'>/9</span>
+        <span className="text-blue-600 font-semibold text-lg text-[20px]">
+          Step 3<span className='text-gray-500'>/9</span>
         </span>
       </div>
 
