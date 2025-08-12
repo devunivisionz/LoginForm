@@ -1,21 +1,16 @@
-export default function StepIndicator() {
+interface StepCounterProps {
+  currentStep: number // starts from 1
+  totalSteps: number
+}
+
+export default function StepCounter({ currentStep, totalSteps }: StepCounterProps) {
+  const startStep = 3
+  const displayStep = startStep + currentStep - 1
+
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-gray-500">Progress</span>
-        <span className="text-sm font-medium text-primary-600">Step 3 of 9</span>
-      </div>
-      
-      <div className="w-full bg-gray-200 rounded-full h-2">
-        <div 
-          className="bg-primary-600 h-2 rounded-full transition-all duration-300"
-          style={{ width: '33.33%' }}
-        ></div>
-      </div>
-      
-      <div className="text-sm text-gray-600">
-        Email Verification
-      </div>
-    </div>
+    <span className="text-blue-600 font-semibold text-lg text-[20px]">
+      Step {displayStep}
+      <span className="text-gray-500">/{totalSteps}</span>
+    </span>
   )
 }

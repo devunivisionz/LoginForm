@@ -6,6 +6,7 @@ import Button from './Button'
 import { sendEmail } from '@/lib/api'
 import { emailValidator } from '@/lib/validations'
 import ShinyText from './ShinyText'
+import StepCounter from './StepIndicator'
 
 export default function EmailForm() {
   const [email, setEmail] = useState('')
@@ -85,12 +86,9 @@ export default function EmailForm() {
   return (
     <div className="w-full">
       {/* Step Indicator */}
-      <div className="text-left mb-4">
-        <span className="text-blue-600 font-semibold text-lg text-[20px]">
-          Step 3<span className='text-gray-500'>/9</span>
-        </span>
-      </div>
-
+<div className="text-left mb-4">
+  <StepCounter currentStep={step} totalSteps={9} />
+</div>
       {/* Header */}
       <div className="text-left mb-6">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">What is your email?</h1>
