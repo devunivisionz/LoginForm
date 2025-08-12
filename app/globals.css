@@ -74,6 +74,15 @@ body.antialiased {
 .custom-focus:focus {
   @apply outline outline-[2px] outline-[#2563EB40] outline-offset-[1px];
 }
+@media screen and (max-width: 1024px) {
+  body.antialiased > div {
+    flex-direction: column;
+}
+aside {
+    height: auto!important;
+    padding: 40px 10px!important;
+}
+}
 @media screen and (max-width: 767px) {
   body.antialiased > div {
     flex-direction: column;
