@@ -7,6 +7,7 @@ import { sendEmail } from '@/lib/api'
 import { emailValidator } from '@/lib/validations'
 import ShinyText from './ShinyText'
 import StepCounter from './StepIndicator'
+import Image from 'next/image'
 
 export default function EmailForm() {
   const [email, setEmail] = useState('')
@@ -42,22 +43,31 @@ useEffect(() => {
     inputRefs.current = inputRefs.current.slice(0, 4)
   }, [])
 
-  const handleEmailSubmit = async () => {
-    setError('')
-    if (!emailValidator(email)) {
-      setError('Please enter a valid email address')
-      return
-    }
-    setIsLoading(true)
-    try {
-      await sendEmail(email)
-      setStep(2) // triggers animation
-    } catch (err) {
-      setError('Failed to send verification email. Please try again.')
-    } finally {
-      setIsLoading(false)
-    }
+const handleEmailSubmit = async () => {
+  setError('');
+  if (!emailValidator(email)) {
+    setError('Please enter a valid email address');
+    return;
   }
+  const code = Math.floor(1000 + Math.random() * 9000).toString(); // 4-digit code
+  setIsLoading(true);
+  try {
+    const res = await fetch('/api/sendVerificationEmail', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, code }),
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.error || 'Failed to send verification email');
+    }
+    setStep(2); // trigger animation or next step
+  } catch (err: string | any) {
+    setError(err.message);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   const handleCodeChange = (index: number, value: string) => {
     if (value.length > 1) return
@@ -110,7 +120,7 @@ useEffect(() => {
 </div>
       {/* Header */}
       <div className="text-left mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">What is your email?</h1>
+        <h1 className="text-[24px] sm:text-3xl font-bold text-gray-900 mb-2">What is your email?</h1>
         <p className="text-gray-600">This is where we send the note.</p>
       </div>
 
@@ -127,24 +137,31 @@ useEffect(() => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full max-w-[calc(100% - 48px)] custom-max-width mx-auto flex px-4 py-[11px] pr-12 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full max-w-[calc(100% - 48px)] custom-max-width mx-auto flex px-4 py-[11px] pr-12 border border-[#DEF1e6] rounded-lg  focus:ring-1 focus:ring-[#2563EB] custom-focus focus:border-transparent"
                 placeholder="Enter your email"
                 required
                 disabled={isLoading}
               />
               {isLoading && (
                 <div className="absolute right-8 top-1/2 transform -translate-y-1/2">
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
+<div>
+ <Image    src="https://i.ibb.co/jPsDb7G5/Ellipse-1.png"
+    alt="Loading..."
+    width={20}
+    height={20}
+    className="animate-spin h-6 w-6"
+  />
+</div>
                 </div>
               )}
             </div>
 
           ) : (
-            <div className="bg-[#E8F0FD] rounded-[12px] rounded-bl-[0] rounded-br-[0] p-3 px-[24px] flex items-center justify-between ">
+            <div className="bg-[#E8F0FD] rounded-[12px] rounded-bl-[0] rounded-br-[0] p-3 px-[16px] sm:px-[24px] flex items-center justify-between ">
               <div className="flex items-center space-x-3 gap-x-[12px] animate-slideLeft">
-                <span className="text-blue-700 font-normal text-[#2563EB]">Email</span>
+                <span className="text-blue-700 hidden sm:flex font-normal text-[#2563EB]">Email</span>
                 {/* <span className="text-blue-700 font-bold"></span> */}
-                <ShinyText text={email} disabled={false} speed={8} />
+                <ShinyText className='!ml-0 sm:ml-auto' text={email} disabled={false} speed={8} />
 
               </div>
              {isMounted && (isMobile ? (
@@ -161,7 +178,7 @@ useEffect(() => {
             fillRule="evenodd"
             clipRule="evenodd"
             d="m3.99 16.854-1.314 3.504a.75.75 0 0 0 .966.965l3.503-1.314a3 3 0 0 0 1.068-.687L18.36 9.175s-.354-1.061-1.414-2.122c-1.06-1.06-2.122-1.414-2.122-1.414L4.677 15.786a3 3 0 0 0-.687 1.068zm12.249-12.63 1.383-1.383c.248-.248.579-.406.925-.348.487.08 1.232.322 1.934 1.025.703.703.945 1.447 1.025 1.934.058.346-.1.677-.348.925L19.774 7.76s-.353-1.06-1.414-2.12c-1.06-1.062-2.121-1.415-2.121-1.415z"
-            fill="#000000"
+            fill="#2563EB "
           />
         </svg>
       ) : (
@@ -179,7 +196,7 @@ useEffect(() => {
 
         {/* OTP Section */}
         {step === 2 && (
-          <div className="animate-fadeIn relative top-[0px] p-6 left-0 w-full mt-[0px]">
+          <div className="animate-fadeIn relative top-[0px] p-4 sm:p-6 left-0 w-full mt-[0px]">
             <h2 className="text-[16px]  leading-6 font-semibold text-gray-900 mb-0">
               Enter verification code
             </h2>
@@ -197,8 +214,8 @@ useEffect(() => {
                   value={digit}
                   onChange={(e) => handleCodeChange(index, e.target.value)}
                   onKeyDown={(e) => handleKeyDown(index, e)}
-                  className={`w-12 h-12 text-center text-xl font-light text-[#0D0D12] border-[1px] border-[#DFE1E6] rounded-[12px] focus:ring-2 focus:ring-blue-200 ${index === 0
-                      ? 'border-blue-500 bg-blue-50'
+                  className={`w-9 sm:w-12 h-9 sm:h-12 text-center text-xl font-light text-[#0D0D12] border-[1px] border-[#DFE1E6] rounded-[8px] sm:rounded-[12px] focus:ring-1 focus:ring-[#2563EB] custom-focus ${index === 0
+                      ? 'border-[#2563EB] bg-[#fff]'
                       : 'border-gray-300'
                     }`}
                   inputMode="numeric"
@@ -244,7 +261,7 @@ useEffect(() => {
         )} */}
 
         {error && (
-          <div className="text-red-600 text-sm bg-red-50 p-3 rounded-lg">
+          <div className="text-red-600 custom-max-width m-auto text-sm bg-red-50 p-3 rounded-lg">
             {error}
           </div>
         )}
@@ -255,7 +272,7 @@ useEffect(() => {
         <button
           type="button"
           onClick={() => step === 2 ? setStep(1) : router.back()}
-          className="text-blue-600 hover:text-blue-700 font-medium flex items-center"
+          className="text-blue-600 hover:text-blue-700 font-medium flex items-center gap-2"
         >
           <span className='text-[22px] mr-[6px] flex'>
             <svg xmlns="http://www.w3.org/2000/svg" width="9" height="14" viewBox="0 0 9 14" fill="none">
@@ -268,7 +285,7 @@ useEffect(() => {
           <Button
             type="submit"
             // variant="primary" 
-            className='bg-[#4B556399]'
+            className='bg-[#4B556399] !hover:bg-[#2563EB] font-bold'
             disabled={!email.trim() || isLoading}
             onClick={handleEmailSubmit}
           >
@@ -278,7 +295,7 @@ useEffect(() => {
           <Button
             type="submit"
             // variant="primary" 
-            className='bg-[#4B556399] :hover:bg-[#2563EB]'
+            className='bg-[#4B556399] !hover:bg-[#2563EB] font-bold'
             disabled={!email.trim() || isLoading}
             onClick={handleEmailSubmit}
           >

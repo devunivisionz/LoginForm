@@ -45,7 +45,7 @@ body.antialiased > div {
   background: linear-gradient(
     120deg,
     rgba(255, 255, 255, 0) 40%,
-    rgba(255, 255, 255, 0.8) 50%,
+    rgba(131, 159, 255) 50%,
     rgba(255, 255, 255, 0) 60%
   );
   background-size: 200% 100%;
@@ -71,17 +71,25 @@ body.antialiased {
     background: #E8F0FD;
     padding: 10px;
 }
-
+.custom-focus:focus {
+  @apply outline outline-[2px] outline-[#2563EB40] outline-offset-[1px];
+}
 @media screen and (max-width: 767px) {
   body.antialiased > div {
     flex-direction: column;
 }
 aside {
     height: auto!important;
-    gap: 50px;
     padding: 40px 10px!important;
 }
 body.antialiased {
     padding: 30px 10px;
 }
+.custom-max-width {
+  max-width: calc(100% - 32px);
+}
+}
+
+@media screen and (max-width: 380px) {
+
 }

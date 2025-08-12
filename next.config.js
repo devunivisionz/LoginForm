@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Next.js 15 no longer needs experimental.appDir as it's stable
+  images: {
+    // Domains or device sizes config if needed; here, no changes needed for local imports
+    unoptimized: true, // Optional: disables optimization if you want
+  },
+  // You can add other configs here
 }
 
 module.exports = nextConfig
