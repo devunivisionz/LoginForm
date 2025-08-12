@@ -37,7 +37,7 @@ export default function Sidebar() {
   }, [])
 
   return (
-    <aside className="w-full  lg:max-w-96  bg-[#E8F0FD] p-4 sm:p-6 !pl-[14px] !pt-[14px] lg:p-8 flex flex-col gap-0   sm:min-h-screen">
+    <aside className="w-full max-w-[100%]  lg:max-w-96  bg-[#E8F0FD] p-4 sm:p-6 !pl-[14px] !pt-[14px] lg:p-8 flex flex-col gap-0   lg:min-h-screen">
       <div className="flex-0 sm:flex-1 space-y-6">
         {/* Logo */}
         <div className="flex items-center space-x-3">
