@@ -13,9 +13,10 @@ export default function TestimonialCard() {
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           {[...Array(1)].map((_, i) => (
-            <svg xmlns="http://www.w3.org/2000/svg" width="102" height="19" viewBox="0 0 102 19" fill="none">
-              <g clip-path="url(#clip0_1_147)">
-                <g clip-path="url(#clip1_1_147)">
+            <svg xmlns="http://www.w3.org/2000/svg"     key={i}
+ width="102" height="19" viewBox="0 0 102 19" fill="none">
+              <g clipPath="url(#clip0_1_147)">
+                <g clipPath="url(#clip1_1_147)">
                   <path d="M9.20452 13.7652L13.2 12.7526L14.8693 17.8974L9.20452 13.7652ZM18.3995 7.1152H11.3664L9.20452 0.492615L7.0426 7.1152H0.00952148L5.70167 11.2201L3.53974 17.8427L9.23186 13.7378L12.7347 11.2201L18.3995 7.1152Z" fill="#219653" />
                   <path d="M30.1022 13.7652L34.0977 12.7526L35.767 17.8974L30.1022 13.7652ZM39.2972 7.1152H32.2641L30.1022 0.492615L27.9403 7.1152H20.9072L26.5993 11.2201L24.4374 17.8427L30.1296 13.7378L33.6324 11.2201L39.2972 7.1152Z" fill="#219653" />
                   <path d="M50.9999 13.7652L54.9954 12.7526L56.6647 17.8974L50.9999 13.7652ZM60.1949 7.1152H53.1618L50.9999 0.492615L48.838 7.1152H41.8049L47.4971 11.2201L45.3351 17.8427L51.0273 13.7378L54.5301 11.2201L60.1949 7.1152Z" fill="#219653" />
