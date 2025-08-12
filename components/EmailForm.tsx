@@ -10,7 +10,7 @@ import StepCounter from './StepIndicator'
 
 export default function EmailForm() {
   const [email, setEmail] = useState('')
-  const [code, setCode] = useState(['3', '2', '5', ''])
+  const [code, setCode] = useState(['', '', '', ''])
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const [step, setStep] = useState(1)
@@ -18,7 +18,26 @@ export default function EmailForm() {
   const [newEmail, setNewEmail] = useState('')
   const inputRefs = useRef<(HTMLInputElement | null)[]>([])
   const router = useRouter()
+ const [isMobile, setIsMobile] = useState(false);
+const [isMounted, setIsMounted] = useState(false);
 
+useEffect(() => {
+  setIsMounted(true);
+}, []);
+  useEffect(() => {
+    // Check window width on mount
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+
+    // Add resize listener to update on window resize
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const handleClick = () => {
+    setStep(1);
+    setShowChangeEmail(false);
+  };
   useEffect(() => {
     inputRefs.current = inputRefs.current.slice(0, 4)
   }, [])
@@ -128,16 +147,32 @@ export default function EmailForm() {
                 <ShinyText text={email} disabled={false} speed={8} />
 
               </div>
-              <button
-  type="button"
-  onClick={() => {
-    setStep(1) // go back to step 1
-    setShowChangeEmail(false) // hide any change-email UI if open
-  }}
-  className="text-[#353849] hover:text-blue-700 font-normal underline decoration-dotted underline-offset-4"
->
-  Change
-</button>
+             {isMounted && (isMobile ? (
+        <svg
+          onClick={handleClick}
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          style={{ cursor: 'pointer' }}
+        >
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="m3.99 16.854-1.314 3.504a.75.75 0 0 0 .966.965l3.503-1.314a3 3 0 0 0 1.068-.687L18.36 9.175s-.354-1.061-1.414-2.122c-1.06-1.06-2.122-1.414-2.122-1.414L4.677 15.786a3 3 0 0 0-.687 1.068zm12.249-12.63 1.383-1.383c.248-.248.579-.406.925-.348.487.08 1.232.322 1.934 1.025.703.703.945 1.447 1.025 1.934.058.346-.1.677-.348.925L19.774 7.76s-.353-1.06-1.414-2.12c-1.06-1.062-2.121-1.415-2.121-1.415z"
+            fill="#000000"
+          />
+        </svg>
+      ) : (
+        <button
+          type="button"
+          onClick={handleClick}
+          className="text-[#353849] hover:text-blue-700 font-normal underline decoration-dotted underline-offset-4"
+        >
+          Change
+        </button>
+      ))}
             </div>
           )}
         </div>
@@ -162,7 +197,7 @@ export default function EmailForm() {
                   value={digit}
                   onChange={(e) => handleCodeChange(index, e.target.value)}
                   onKeyDown={(e) => handleKeyDown(index, e)}
-                  className={`w-12 h-12 text-center text-xl font-light text-[#0D0D12] border-[1px] border-[#DFE1E6] rounded-[12px] focus:ring-2 focus:ring-blue-200 ${index === 3
+                  className={`w-12 h-12 text-center text-xl font-light text-[#0D0D12] border-[1px] border-[#DFE1E6] rounded-[12px] focus:ring-2 focus:ring-blue-200 ${index === 0
                       ? 'border-blue-500 bg-blue-50'
                       : 'border-gray-300'
                     }`}
