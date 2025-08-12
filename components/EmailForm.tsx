@@ -129,12 +129,15 @@ export default function EmailForm() {
 
               </div>
               <button
-                type="button"
-                onClick={() => setShowChangeEmail(!showChangeEmail)}
-                className="text-[#353849] hover:text-blue-700 font-normal underline decoration-dotted underline-offset-4"
-              >
-                Change
-              </button>
+  type="button"
+  onClick={() => {
+    setStep(1) // go back to step 1
+    setShowChangeEmail(false) // hide any change-email UI if open
+  }}
+  className="text-[#353849] hover:text-blue-700 font-normal underline decoration-dotted underline-offset-4"
+>
+  Change
+</button>
             </div>
           )}
         </div>
